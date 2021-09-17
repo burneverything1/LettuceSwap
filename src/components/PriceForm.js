@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import priceService from '../services/prices'
 
-const PriceForm = ({ sendPrice }) => {
+const PriceForm = ({ plant }) => {
     const [newPrice, setNewPrice] = useState('')
 
     const handlePriceChange = (event) => {
@@ -8,14 +9,20 @@ const PriceForm = ({ sendPrice }) => {
     }
 
     return (
-        <div>
-            <h2>Enter a new Bid/Ask</h2>
-
-            <form>
-                <div>Plant Name:
-
-                </div>
-            </form>
-        </div>
+        <form>
+            <select>
+                <option value='bids'>Bid</option>
+                <option value='asks'>Ask</option>
+            </select>
+            Price in cents/oz
+                <input
+                    type='number'
+                    value={newPrice}
+                    onChange={handlePriceChange}
+                />
+            <button type='submit'>Send</button>
+        </form>
     )
 }
+
+export default PriceForm

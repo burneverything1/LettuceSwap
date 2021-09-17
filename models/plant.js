@@ -1,7 +1,14 @@
 const mongoose = require('mongoose')
 
-const dataSchema = new mongoose.Schema({
-    // write schema
+const plantSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    weeksToHarvest: {
+        type: Number,
+        required: true
+    }
 })
 
 dataSchema.set('toJSON', {
@@ -12,4 +19,4 @@ dataSchema.set('toJSON', {
     }
 })
 
-module.exports = mongoose.model('Datum', dataSchema)
+module.exports = mongoose.model('Plant', dataSchema)

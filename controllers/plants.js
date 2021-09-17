@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const Datum = require('../models/datum')
+const Plant = require('../models/datum')
 
 router.get('/', (request, response) => {
-    Datum
+    Plant
         .find({})
         .then(data => {
             response.json(data)
@@ -10,7 +10,7 @@ router.get('/', (request, response) => {
 })
 
 router.post('/', (request, response) => {
-    const data = new Datum(request.body)
+    const data = new Plant(request.body)
 
     data
         .save()

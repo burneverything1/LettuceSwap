@@ -9,6 +9,8 @@ plantsRouter.get('/', async (request, response) => {
 
 const newPriceData = async (newPlant) => {
     const plantPrices = new PriceData({
+        bids: {},
+        asks: {},
         plant: newPlant._id
     })
     const savedPriceData = await plantPrices.save()

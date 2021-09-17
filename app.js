@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 
 const plantsRouter = require('./controllers/plants')
+const priceRouter = require('./controllers/pricedata')
 
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
@@ -28,6 +29,7 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use('/api/plants', plantsRouter)
+app.use('/api/prices', priceRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

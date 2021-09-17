@@ -4,20 +4,19 @@ const priceDataSchema = new mongoose.Schema({
     bids: {
         type: Map,
         of: Number,
-        required: true,
     },
     asks: {
         type: Map,
         of: Number,
-        required: true
     },
     plant: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Plant'
+        ref: 'Plant',
+        required: true
     }
 })
 
-noteSchema.set('toJSON', {
+priceDataSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id

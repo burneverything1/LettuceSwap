@@ -15,7 +15,7 @@ const plantSchema = new mongoose.Schema({
     }
 })
 
-dataSchema.set('toJSON', {
+plantSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
@@ -23,4 +23,4 @@ dataSchema.set('toJSON', {
     }
 })
 
-module.exports = mongoose.model('Plant', dataSchema)
+module.exports = mongoose.model('Plant', plantSchema)

@@ -1,22 +1,33 @@
-const router = require('express').Router()
-const Plant = require('../models/datum')
+const plantsRouter = require('express').Router()
+const Plant = require('../models/plant')
+const PriceData = require('../models/pricedata')
 
-router.get('/', (request, response) => {
-    Plant
-        .find({})
-        .then(data => {
-            response.json(data)
-        })
+plantsRouter.get('/', async (request, response) => {
+    const plants = await Plant.find({}).populate('pricedata')
+    response.json(plants)
 })
 
-router.post('/', (request, response) => {
-    const data = new Plant(request.body)
+plantsRouter.post('/', async (request, response, next) => {
+    const body = request.body
 
-    data
-        .save()
-        .then(result => {
-            response.status(201).json(result)
+    const plant = new Plant({
+        name: body.name,
+        weeksToHarvest: body.weeksToHarvest
+    })
+
+    try {
+        let savedPlant = await plant.save()
+        // create new price data for new plant
+        const plantPrices = new PriceData({
+            plant: savedPlant._id,
         })
+        savedPlant.PriceData = plantPrices._id
+        savedPlant = await savedPlant.save()
+
+        response.json(savedPlant)
+    } catch(exception) {
+        next(exception)
+    }
 })
 
-module.exports = router
+module.exports = plantsRouter

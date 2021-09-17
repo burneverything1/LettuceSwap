@@ -1,21 +1,23 @@
 const mongoose = require('mongoose')
 
-const plantSchema = new mongoose.Schema({
-    name: {
-        type: String,
+const priceDataSchema = new mongoose.Schema({
+    bids: {
+        type: Map,
+        of: Number,
         required: true,
     },
-    weeksToHarvest: {
-        type: Number,
+    asks: {
+        type: Map,
+        of: Number,
         required: true
     },
-    priceData: {
+    plant: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'PriceData'
+        ref: 'Plant'
     }
 })
 
-dataSchema.set('toJSON', {
+noteSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
@@ -23,4 +25,4 @@ dataSchema.set('toJSON', {
     }
 })
 
-module.exports = mongoose.model('Plant', dataSchema)
+module.exports = mongoose.model('PriceData', priceDataSchema)

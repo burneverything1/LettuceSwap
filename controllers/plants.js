@@ -7,22 +7,29 @@ plantsRouter.get('/', async (request, response) => {
     response.json(plants)
 })
 
+const newPriceData = async (newPlant) => {
+    const plantPrices = new PriceData({
+        plant: newPlant._id
+    })
+    const savedPriceData = await plantPrices.save()
+    newPlant.priceData = savedPriceData._id
+    const savedPlant = await newPlant.save()
+    return savedPlant
+}
+
 plantsRouter.post('/', async (request, response, next) => {
     const body = request.body
 
     const plant = new Plant({
         name: body.name,
-        weeksToHarvest: body.weeksToHarvest
+        weeksToHarvest: body.weeksToHarvest,
+        priceData: null
     })
 
     try {
         let savedPlant = await plant.save()
-        // create new price data for new plant
-        const plantPrices = new PriceData({
-            plant: savedPlant._id,
-        })
-        savedPlant.PriceData = plantPrices._id
-        savedPlant = await savedPlant.save()
+        // create empty Price Data and attach
+        savedPlant = await newPriceData(savedPlant)
 
         response.json(savedPlant)
     } catch(exception) {

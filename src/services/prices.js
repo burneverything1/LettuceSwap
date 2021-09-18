@@ -1,11 +1,16 @@
 import axios from 'axios'
 const baseUrl = '/api/prices'
 
+const getPrice = async (id) => {
+    const response = await axios.get(`${baseUrl}/${id}`)
+    return response.data
+}
+
 const sendPrice = async (id, priceOffer) => {
     const response = await axios.put(`${baseUrl}/${id}`, priceOffer)
     return response.data
 }
 
 export default {
-    sendPrice
+    getPrice, sendPrice
 }

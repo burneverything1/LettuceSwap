@@ -34,9 +34,9 @@ const CheckSale = async (price_id) => {
         }
         console.log('bid and ask matched - sale logged!');
         await PriceData.findByIdAndUpdate(price_id, all_prices)
-        return true
+        return {result: true, price: max_bid}
     }
-    return false
+    return {result: false, price: 0}
 }
 
 module.exports = {CheckSale}

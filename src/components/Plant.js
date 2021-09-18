@@ -5,13 +5,14 @@ import PlantPriceDisplay from './PlantPriceDisplay'
 
 import priceService from '../services/prices'
 
-const Plant = ({ plant }) => {
+const Plant = ({ plant, notifyUser }) => {
     const [priceChartData, setPriceChartData] = useState([])
 
     const refreshPriceChart = () => {
         priceService
             .getChart(plant.priceData)
             .then(priceChartData => {
+                console.log(priceChartData);
                 setPriceChartData(priceChartData)
             })
     }
@@ -23,8 +24,8 @@ const Plant = ({ plant }) => {
     const sendOffer = async (priceObject) => {
         priceFormRef.current.toggleVisibility()
         try {
-            const sale_success = await priceService.sendPrice(plant.priceData, priceObject)
-            // if sale success, send notification
+            await priceService.sendPrice(plant.priceData, priceObject)
+            notifyUser('sale success', 'green')
             refreshPriceChart()
         } catch (exception){
             console.log(exception);

@@ -4,11 +4,15 @@ import Togglable from './components/Togglable'
 import PlantDisplay from './components/PlantDisplay'
 import ClimateTalk from './components/static/ClimateTalk'
 import Header from './components/static/Header'
+import Notification from './components/Notification'
 
 import plantService from './services/plants'
 
+
 const App = () => {
   const [plants, setPlants] = useState([])
+  const [ notifMessage, setNotifMessage ] = useState(null)
+  const [ notifType, setNotifType ] = useState('')
 
   // populate on load
   useEffect(() => {
@@ -29,14 +33,23 @@ const App = () => {
     }
   }
 
-  const plantFormRef = useRef()
+  const notifyUser = (message, type) => {
+    setNotifMessage(message)
+    setNotifType(type)
+    setTimeout(() => {
+        setNotifMessage(null)
+    }, 3000)
+}
+
+  const plantFormRef = useRef()  
 
   return (
     <div>
       <Header/>
       <br/>
+      <Notification message={notifMessage} type={notifType}/>
       <div>
-        <PlantDisplay plants={plants}/>
+        <PlantDisplay plants={plants} notifyUser={notifyUser}/>
         <br/>
         <Togglable buttonLabel='New Plant' ref={plantFormRef}>
           <PlantForm createPlant={createPlant}/>

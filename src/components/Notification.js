@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Notification = ({ message, type }) => {
+
     const notifStyle = {
         color: type,
         background: 'lightgrey',

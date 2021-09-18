@@ -1,11 +1,11 @@
 import React from 'react'
 import Plant from './Plant'
 
-const PlantDisplay = ({ plants }) => {
+const PlantDisplay = ({ plants, notifyUser }) => {
 
     const makePlants = (plants) => {
         return plants.map(plant => {
-            return <Plant plant={plant}/>
+            return <Plant plant={plant} notifyUser={notifyUser}/>
         })
     }
 

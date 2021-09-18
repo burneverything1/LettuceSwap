@@ -2,24 +2,41 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 
 const PlantPriceDisplay = ({ priceData }) => {
-
-    const bid_labels = []
+    // prepare data for display
+    const prices = []
     const bid_data = []
-    for (const price in priceData.bids) {
-        bid_labels.push(price)
-        bid_data.push(priceData.bids[price])
-    }
-
-    const ask_lables = []
     const ask_data = []
+
     for (const price in priceData.bids) {
-        ask_lables.push(price)
-        ask_data.push(priceData.asks[price])
+        prices.push(price)
     }
 
+    for (const price in priceData.asks) {
+        prices.push(price)
+    }
+    const max = Math.max(prices)
+    const min = Math.min(prices)
 
-    const bid_chart = {
-        labels: bid_labels,
+    const labels = []
+    for (let i = min; i <= max; i + 5){
+        labels.push(i)
+    }
+
+    for (let x in labels) {
+        if (x in priceData.bids){
+            bid_data.push(priceData.bids[x])
+        } else {
+            bid_data.push(0)
+        }
+        if (x in priceData.asks){
+            ask_data.push(priceData.asks[x])
+        } else {
+            ask_data.push(0)
+        }
+    }
+
+    const chart = {
+        labels: labels,
         datasets: [{
             label: 'Bid Prices',
             data: bid_data
@@ -40,7 +57,7 @@ const PlantPriceDisplay = ({ priceData }) => {
 
     return (
         <div>
-            <Bar data={bid_chart}/>
+            <Bar data={chart}/>
         </div>
     )
 }

@@ -24,7 +24,6 @@ priceRouter.put('/:id', async (request, response, next) => {
     const body = request.body
 
     let price_data = await PriceData.findById(request.params.id)
-    console.log(price_data);
     // get bid or ask price map
     let plantprices = price_data.get(`${body.type}`)
     // if prices exist, increase number of bid by 1

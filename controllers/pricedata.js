@@ -10,7 +10,7 @@ priceRouter.get('/:id', async (request, response, next) => {
     try {
         const price = await PriceData.findById(request.params.id)
         if (price) {
-            response.json(note)
+            response.json(price)
         } else {
             response.status(404).end()
         }

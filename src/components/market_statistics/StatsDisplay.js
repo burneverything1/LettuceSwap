@@ -23,9 +23,13 @@ const StatsDisplay = () => {
             })
     }
 
-    useEffect(() => {
+    const refreshAll = () => {
         refreshStats()
         getLocations()
+    }
+
+    useEffect(() => {
+        refreshAll()
     }, [])
 
     return (
@@ -48,7 +52,8 @@ const StatsDisplay = () => {
                 <LocDisplay locations={locations}/>
                 </tr>
             </table>
-            <button onClick={refreshStats}>Refresh Stats</button>
+            <br/>
+            <button onClick={refreshAll}>Refresh Stats</button>
         </div>
     )
 }

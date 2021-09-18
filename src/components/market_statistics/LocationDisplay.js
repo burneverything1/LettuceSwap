@@ -13,6 +13,7 @@ const LocDisplay = ({ locations }) => {
     return (
         <ul>
             <h3>Is Your Community Ready?</h3>
+            <p>Check out which places are trading produce!</p>
             {makeLocations()}
         </ul>
     )

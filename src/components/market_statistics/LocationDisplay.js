@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import locationService from '../services/location'
+import React from 'react'
 
 const LocDisplay = ({ locations }) => {
 

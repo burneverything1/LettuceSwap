@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PlantForm from './components/PlantForm'
-import Togglable from './components/Togglable'
-import PlantDisplay from './components/PlantDisplay'
+import Togglable from './components/utility/Togglable'
+import PlantDisplay from './components/market_prices/PlantDisplay'
 import ClimateTalk from './components/static/ClimateTalk'
 import Header from './components/static/Header'
-import Notification from './components/Notification'
-import StatsDisplay from './components/StatsDisplay'
+import Notification from './components/utility/Notification'
+import StatsDisplay from './components/market_statistics/StatsDisplay'
 
 import plantService from './services/plants'
 

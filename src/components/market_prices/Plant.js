@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Togglable from './Togglable'
+import Togglable from '../utility/Togglable'
 import PriceForm from './PriceForm'
 import PlantPriceDisplay from './PlantPriceDisplay'
 
-import priceService from '../services/prices'
-import locationService from '../services/location'
+import priceService from '../../services/prices'
+import locationService from '../../services/location'
 
 const Plant = ({ plant, notifyUser }) => {
     const [priceChartData, setPriceChartData] = useState([])

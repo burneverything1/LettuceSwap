@@ -1,5 +1,5 @@
 import React from 'react'
-import Togglable from '../Togglable'
+import Togglable from '../utility/Togglable'
 import EmissionImage from '../../assets/emissions.png'
 
 const ClimateTalk = (props) => {

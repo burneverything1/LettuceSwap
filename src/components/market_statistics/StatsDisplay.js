@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import LocDisplay from './LocationDisplay'
-import statService from '../services/statistic'
-import locationService from '../services/location'
+import statService from '../../services/statistic'
+import locationService from '../../services/location'
 
 const StatsDisplay = () => {
     const [stats, setStats] = useState([])

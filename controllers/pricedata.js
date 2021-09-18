@@ -50,7 +50,10 @@ priceRouter.put('/:id', async (request, response, next) => {
     try{
         await price_data.save()
         let sale_happen = await CheckSale.CheckSale(request.params.id)       // check if sale happens
-        response.json(sale_happen)      // send back boolean on sale success
+        let saved_data = await price_data.save()
+        response.json({
+            saved_data, sale_happen
+        })      // send back boolean on sale success
     } catch(exception){
         next(exception)
     }

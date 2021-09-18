@@ -10,9 +10,12 @@ const PlantDisplay = ({ plants }) => {
     }
 
     return (
-        <table>
-            {makePlants(plants)}
-        </table>
+        <div>
+            <h3>Plant Market Prices</h3>
+            <table>
+                {makePlants(plants)}
+            </table>
+        </div>
     )
 }
 

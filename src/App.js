@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import PlantForm from './components/PlantForm'
 import Togglable from './components/Togglable'
 import PlantDisplay from './components/PlantDisplay'
+import ClimateTalk from './components/static/ClimateTalk'
+import Header from './components/static/Header'
 
 import plantService from './services/plants'
 
@@ -31,11 +33,17 @@ const App = () => {
 
   return (
     <div>
-      <h1>LettuceSwap</h1>
-      <PlantDisplay plants={plants}/>
-      <Togglable buttonLabel='New Plant' ref={plantFormRef}>
-        <PlantForm createPlant={createPlant}/>
-      </Togglable>
+      <Header/>
+      <br/>
+      <div>
+        <PlantDisplay plants={plants}/>
+        <br/>
+        <Togglable buttonLabel='New Plant' ref={plantFormRef}>
+          <PlantForm createPlant={createPlant}/>
+        </Togglable>
+      </div>
+      <br/>
+      <ClimateTalk/>
     </div>
   )
 }

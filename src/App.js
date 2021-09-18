@@ -38,7 +38,7 @@ const App = () => {
     setNotifType(type)
     setTimeout(() => {
         setNotifMessage(null)
-    }, 3000)
+    }, 7000)
 }
 
   const plantFormRef = useRef()  

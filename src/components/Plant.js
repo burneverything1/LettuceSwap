@@ -4,6 +4,7 @@ import PriceForm from './PriceForm'
 import PlantPriceDisplay from './PlantPriceDisplay'
 
 import priceService from '../services/prices'
+import locationService from '../services/location'
 
 const Plant = ({ plant, notifyUser }) => {
     const [priceChartData, setPriceChartData] = useState([])
@@ -22,6 +23,7 @@ const Plant = ({ plant, notifyUser }) => {
 
     const sendOffer = async (priceObject) => {
         priceFormRef.current.toggleVisibility()
+        locationService.sendLocation(plant.id)
         try {
             const sale_success = await priceService.sendPrice(plant.priceData, priceObject)
             if (sale_success.sale_happen.result){

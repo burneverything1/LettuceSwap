@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,YACI,qBACJ","file":"main.3ba16cc6.chunk.css","sourcesContent":["table, th, td {\n    border: 1px solid black;\n}"]}

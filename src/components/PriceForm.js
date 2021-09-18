@@ -1,16 +1,34 @@
 import React, { useState } from 'react'
-import priceService from '../services/prices'
 
-const PriceForm = ({ plant }) => {
+const PriceForm = ({ sendOffer }) => {
     const [newPrice, setNewPrice] = useState('')
+    const [offerType, setOfferType] = useState('bids')
 
     const handlePriceChange = (event) => {
         setNewPrice(event.target.value)
     }
 
+    const handleTypeChange = (event) => {
+        setOfferType(event.target.value)
+    }
+
+    const sendPrice = (event) => {
+        event.preventDefault()
+        sendOffer({
+            type: offerType,
+            price: String(newPrice)
+        })
+
+        setNewPrice('')
+        setOfferType('bids')
+    }
+
     return (
-        <form>
-            <select>
+        <form onSubmit={sendPrice}>
+            <select
+                value={offerType}
+                onChange={handleTypeChange}
+            >
                 <option value='bids'>Bid</option>
                 <option value='asks'>Ask</option>
             </select>

@@ -4,7 +4,6 @@ import Togglable from './components/Togglable'
 import PlantDisplay from './components/PlantDisplay'
 
 import plantService from './services/plants'
-import priceService from './services/prices'
 
 const App = () => {
   const [plants, setPlants] = useState([])

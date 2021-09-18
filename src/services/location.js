@@ -1,6 +1,11 @@
 import axios from 'axios'
 const baseUrl = '/api/location'
 
+const getLocations = async () => {
+    const response = await axios.get(baseUrl)
+    return response.data
+}
+
 const sendLocation = async (plantId) => {
     const response = await axios.get('https://geolocation-db.com/json/')
     const payload = {
@@ -12,5 +17,5 @@ const sendLocation = async (plantId) => {
 }
 
 export default {
-    sendLocation
+    getLocations, sendLocation
 }

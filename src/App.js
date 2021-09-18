@@ -5,6 +5,7 @@ import PlantDisplay from './components/PlantDisplay'
 import ClimateTalk from './components/static/ClimateTalk'
 import Header from './components/static/Header'
 import Notification from './components/Notification'
+import StatsDisplay from './components/StatsDisplay'
 
 import plantService from './services/plants'
 
@@ -50,6 +51,8 @@ const App = () => {
       <Notification message={notifMessage} type={notifType}/>
       <div>
         <PlantDisplay plants={plants} notifyUser={notifyUser}/>
+        <br/>
+        <StatsDisplay/>
         <br/>
         <Togglable buttonLabel='New Plant' ref={plantFormRef}>
           <PlantForm createPlant={createPlant}/>

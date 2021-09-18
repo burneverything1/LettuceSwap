@@ -33,8 +33,10 @@ const CheckSale = async (price_id) => {
             all_prices.asks.set(min_ask, parseInt(num_asks) - 1)
         }
         console.log('bid and ask matched - sale logged!');
+        await PriceData.findByIdAndUpdate(price_id, all_prices)
+        return true
     }
-    await PriceData.findByIdAndUpdate(price_id, all_prices)
+    return false
 }
 
 module.exports = {CheckSale}

@@ -12,7 +12,6 @@ const Plant = ({ plant, notifyUser }) => {
         priceService
             .getChart(plant.priceData)
             .then(priceChartData => {
-                console.log(priceChartData);
                 setPriceChartData(priceChartData)
             })
     }
@@ -24,8 +23,12 @@ const Plant = ({ plant, notifyUser }) => {
     const sendOffer = async (priceObject) => {
         priceFormRef.current.toggleVisibility()
         try {
-            await priceService.sendPrice(plant.priceData, priceObject)
-            notifyUser('sale success', 'green')
+            const sale_success = await priceService.sendPrice(plant.priceData, priceObject)
+            if (sale_success.sale_happen.result){
+                notifyUser(`successful sale @ ${sale_success.sale_happen.price}`, 'green')
+            } else {
+                notifyUser(`${priceObject.type} successful @ ${priceObject.price}`, 'green')
+            }
             refreshPriceChart()
         } catch (exception){
             console.log(exception);

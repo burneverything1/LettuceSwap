@@ -13,7 +13,6 @@ const getChart = async (id) => {
 
 const sendPrice = async (id, priceOffer) => {
     const response = await axios.put(`${baseUrl}/${id}`, priceOffer)
-    console.log(response.data);
     return response.data
 }
 

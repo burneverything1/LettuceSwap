@@ -8,6 +8,7 @@ plantsRouter.get('/', async (request, response) => {
 })
 
 const newPriceData = async (newPlant) => {
+    // attach empty price data to new plant
     const plantPrices = new PriceData({
         bids: {},
         asks: {},

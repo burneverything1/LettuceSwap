@@ -6,21 +6,25 @@ import PlantPriceDisplay from './PlantPriceDisplay'
 import priceService from '../services/prices'
 
 const Plant = ({ plant }) => {
-    const [priceData, setPriceData] = useState([])
+    const [priceChartData, setPriceChartData] = useState([])
+
+    const refreshPriceChart = () => {
+        priceService
+            .getChart(plant.priceData)
+            .then(priceChartData => {
+                setPriceChartData(priceChartData)
+            })
+    }
 
     useEffect(() => {
-        priceService
-            .getPrice(plant.priceData)
-            .then(priceData => {
-                setPriceData(priceData)
-            })
+        refreshPriceChart()
     }, [])
 
     const sendOffer = async (priceObject) => {
         priceFormRef.current.toggleVisibility()
         try {
-            const savedPrice = await priceService.sendPrice(plant.priceData, priceObject)
-            setPriceData(savedPrice)
+            await priceService.sendPrice(plant.priceData, priceObject)
+            refreshPriceChart()
         } catch (exception){
             console.log(exception);
         }
@@ -31,7 +35,7 @@ const Plant = ({ plant }) => {
     return (
         <tr>
             <th>{plant.name}</th>
-            <td><PlantPriceDisplay priceData={priceData}/></td>
+            <td><PlantPriceDisplay priceChartData={priceChartData}/></td>
             <td>
                 <Togglable buttonLabel='Send Bid/Ask' ref={priceFormRef}>
                     <PriceForm sendOffer={sendOffer}/>

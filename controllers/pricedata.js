@@ -1,5 +1,6 @@
 const priceRouter = require('express').Router()
 const PriceData = require('../models/pricedata')
+const CheckSale = require('../services/checksale')
 
 priceRouter.get('/', async (request, response) => {
     const prices = await PriceData.find({})
@@ -47,6 +48,8 @@ priceRouter.put('/:id', async (request, response, next) => {
     }
 
     try{
+        await price_data.save()
+        await CheckSale.CheckSale(request.params.id)       // check if sale happens
         const savedPrice = await price_data.save()
         response.json(savedPrice)
     } catch(exception){

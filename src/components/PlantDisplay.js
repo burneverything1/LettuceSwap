@@ -11,7 +11,7 @@ const PlantDisplay = ({ plants }) => {
 
     return (
         <div>
-            <h3>Plant Market Prices</h3>
+            <h3>Produce Market Prices</h3>
             <table>
                 {makePlants(plants)}
             </table>

@@ -23,7 +23,8 @@ const Plant = ({ plant }) => {
     const sendOffer = async (priceObject) => {
         priceFormRef.current.toggleVisibility()
         try {
-            await priceService.sendPrice(plant.priceData, priceObject)
+            const sale_success = await priceService.sendPrice(plant.priceData, priceObject)
+            // if sale success, send notification
             refreshPriceChart()
         } catch (exception){
             console.log(exception);

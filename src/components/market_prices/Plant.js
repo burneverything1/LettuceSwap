@@ -22,14 +22,22 @@ const Plant = ({ plant, notifyUser }) => {
     }, [])
 
     const sendOffer = async (priceObject) => {
-        priceFormRef.current.toggleVisibility()
-        locationService.sendLocation(plant.id)
+        priceFormRef.current.toggleVisibility()     // close bid/ask form
+
+        // check price is mult of 5
+        let test_price = Number(priceObject.price)
+        if (test_price % 5 !== 0){
+            notifyUser('Please submit an offer in increment of 5 cents', 'red')
+            return
+        }
+        
+        locationService.sendLocation(plant.id)      // log location of client
         try {
             const sale_success = await priceService.sendPrice(plant.priceData, priceObject)
             if (sale_success.sale_happen.result){
-                notifyUser(`successful sale @ ${sale_success.sale_happen.price}`, 'green')
+                notifyUser(`successful sale @ ${sale_success.sale_happen.price} c/oz of ${plant.name}`, 'green')
             } else {
-                notifyUser(`${priceObject.type} successful @ ${priceObject.price}`, 'green')
+                notifyUser(`${priceObject.type} successful @ ${priceObject.price} c/oz of ${plant.name}`, 'green')
             }
             refreshPriceChart()
         } catch (exception){

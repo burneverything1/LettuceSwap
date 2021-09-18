@@ -52,11 +52,12 @@ const App = () => {
       <div>
         <PlantDisplay plants={plants} notifyUser={notifyUser}/>
         <br/>
-        <StatsDisplay/>
-        <br/>
         <Togglable buttonLabel='New Plant' ref={plantFormRef}>
           <PlantForm createPlant={createPlant}/>
         </Togglable>
+        <br/>
+        <StatsDisplay/>
+        <br/>
       </div>
       <br/>
       <ClimateTalk/>

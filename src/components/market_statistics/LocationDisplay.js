@@ -12,6 +12,7 @@ const LocDisplay = ({ locations }) => {
 
     return (
         <ul>
+            <h3>Is Your Community Ready?</h3>
             {makeLocations()}
         </ul>
     )

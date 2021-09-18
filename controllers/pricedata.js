@@ -1,6 +1,7 @@
 const priceRouter = require('express').Router()
 const PriceData = require('../models/pricedata')
 const CheckSale = require('../services/checksale')
+const StatService = require('../services/statistic')
 
 priceRouter.get('/', async (request, response) => {
     const prices = await PriceData.find({})
@@ -37,6 +38,14 @@ priceRouter.put('/:id', async (request, response, next) => {
     // bidding and selling functions
     const body = request.body
 
+    // log bid/ask
+    if (body.type === 'bids'){
+        StatService.addBid()
+    }
+    else if (body.type === 'asks'){
+        StatService.addAsk()
+    }
+
     let price_data = await PriceData.findById(request.params.id)
     // get bid or ask price map
     let plantprices = price_data.get(`${body.type}`)
@@ -50,6 +59,9 @@ priceRouter.put('/:id', async (request, response, next) => {
     try{
         await price_data.save()
         let sale_happen = await CheckSale.CheckSale(request.params.id)       // check if sale happens
+        if (sale_happen.result) {
+            StatService.addSale()       // log sale in stats
+        }
         let saved_data = await price_data.save()
         response.json({
             saved_data, sale_happen

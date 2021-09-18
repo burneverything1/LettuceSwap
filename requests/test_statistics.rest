@@ -2,5 +2,5 @@ POST http://localhost:3001/api/statistic/sale
 Content-Type: application/json
 
 {
-    "sale_count": 1
+    "count": 1
 }

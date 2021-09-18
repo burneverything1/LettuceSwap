@@ -19,6 +19,19 @@ priceRouter.get('/:id', async (request, response, next) => {
     }
 })
 
+priceRouter.get('/chart/:id', async (request, response, next) => {
+    try {
+        let price_data = await PriceData.findById(request.params.id)
+        if (price_data) {
+            response.json(PriceChartData(price_data))
+        } else {
+            response.status(404).end()
+        }
+    } catch(exception) {
+        next(exception)
+    }
+})
+
 priceRouter.put('/:id', async (request, response, next) => {
     // bidding and selling functions
     const body = request.body
@@ -40,5 +53,43 @@ priceRouter.put('/:id', async (request, response, next) => {
         next(exception)
     }
 })
+
+const PriceChartData = (priceData) => {
+    // prepare data for display
+    const prices = []
+    const bid_data = []
+    const ask_data = []
+
+    priceData.bids.forEach((value, key) => prices.push(parseInt(key)))
+    priceData.asks.forEach((value, key) => prices.push(parseInt(key)))
+    const max = Math.max(...prices)
+    const min = Math.min(...prices)
+
+    const labels = []
+    for (let i = min; i <= max; i = i + 5){
+        labels.push(i)
+    }
+
+    labels.forEach(label => {
+        let num = String(label)
+        if (priceData.bids.has(num)){
+            bid_data.push(priceData.bids.get(num))
+        } else {
+            bid_data.push(0)
+        }
+
+        if (priceData.asks.has(num)){
+            ask_data.push(priceData.asks.get(num))
+        } else {
+            ask_data.push(0)
+        }
+    })
+
+    return {
+        labels: labels,
+        bid_data: bid_data,
+        ask_data: ask_data
+    }
+}
 
 module.exports = priceRouter

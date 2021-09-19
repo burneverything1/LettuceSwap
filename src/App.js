@@ -52,7 +52,7 @@ const App = () => {
       <div>
         <PlantDisplay plants={plants} notifyUser={notifyUser}/>
         <br/>
-        <Togglable buttonLabel='New Plant' ref={plantFormRef}>
+        <Togglable buttonLabel='New Plant' closeLabel='Cancel' ref={plantFormRef}>
           <PlantForm createPlant={createPlant}/>
         </Togglable>
         <br/>

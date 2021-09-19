@@ -1,12 +1,13 @@
 import React from 'react'
 import Togglable from '../utility/Togglable'
 import EmissionImage from '../../assets/emissions.png'
+import FoodVolume from '../../assets/volume_food.png'
 
 const ClimateTalk = (props) => {
     return (
         <div>
             <h1>Why is Agriculture Reform Important for Humanity?</h1>
-            <Togglable buttonLabel='Click Here to Find Out More'>
+            <Togglable buttonLabel='Click Here to Find Out More' closeLabel='Close'>
                 <h2>The Emissions Associated with Agriculture</h2>
                 <img src={EmissionImage} style={{width:'400px'}}/>
                 <h3>10% of US Emissions is due to Agriculture</h3>
@@ -22,6 +23,12 @@ const ClimateTalk = (props) => {
                 <p>Source:
                     <br />
                     <a href='https://indooragtechnyc.com/is-agriculture-the-next-area-to-experience-decentralization/'>Eco Investor Op-ed</a>
+                </p>
+                <h3>Total Vood Volume</h3>
+                <img src={FoodVolume} style={{width:'400px'}}/>
+                <p>Source:
+                    <br />
+                    <a href='https://css.umich.edu/factsheets/us-food-system-factsheet'>Source for Total Volume of Food</a>
                 </p>
             </Togglable>
         </div>

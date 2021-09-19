@@ -52,7 +52,7 @@ const Plant = ({ plant, notifyUser }) => {
             <th>{plant.name}</th>
             <td><PlantPriceDisplay priceChartData={priceChartData}/></td>
             <td>
-                <Togglable buttonLabel='Send Bid/Ask' ref={priceFormRef}>
+                <Togglable buttonLabel='Send Bid/Ask' closeLabel='Cancel' ref={priceFormRef}>
                     <PriceForm sendOffer={sendOffer}/>
                 </Togglable>
             </td>

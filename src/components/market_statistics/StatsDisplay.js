@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import LocDisplay from './LocationDisplay'
+import EnvironDisplay from './EnvironDisplay'
+
 import statService from '../../services/statistic'
 import locationService from '../../services/location'
 
@@ -49,7 +51,14 @@ const StatsDisplay = () => {
                     <td>{stats.totalBids}</td>
                 </tr>
                 <tr>
-                <LocDisplay locations={locations}/>
+                    <td colspan="2">
+                        <EnvironDisplay totalSales={stats.totalSales}/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <LocDisplay locations={locations}/>
+                    </td>
                 </tr>
             </table>
             <br/>

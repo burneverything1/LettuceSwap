@@ -32,12 +32,14 @@ const PriceForm = ({ sendOffer }) => {
                 <option value='bids'>Bid</option>
                 <option value='asks'>Ask</option>
             </select>
+            <br/>
             Price in cents/oz in 5c increments
                 <input
                     type='number'
                     value={newPrice}
                     onChange={handlePriceChange}
                 />
+            <br/>
             <button type='submit'>Send</button>
         </form>
     )

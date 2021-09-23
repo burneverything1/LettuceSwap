@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/plants
+Content-Type: application/json
+
+{
+    "name": "Cilantro",
+    "weeksToHarvest": 4
+}
